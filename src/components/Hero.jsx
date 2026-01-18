@@ -3,47 +3,104 @@ import { ArrowRight, Play } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background Image */}
-      <div
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32">
+      {/* Background Image with Parallax Effect */}
+      <motion.div
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
             'url(https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1920&h=1080&fit=crop)',
         }}
+        animate={{
+          scale: [1, 1.05, 1],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
       />
       
-      {/* Dark Warm Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-red-950/70 to-black/80" />
-      
-      {/* Orange Glow Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-orange-900/20 to-transparent" />
-      
-      {/* Additional blur overlay */}
-      <div className="absolute inset-0 backdrop-blur-[2px]" />
+      {/* Dark Background Overlay for Text Readability */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70" />
+
+      {/* Floating Particles Effect */}
+      {[...Array(5)].map((_, i) => {
+        const randomX = (i * 20) % 100;
+        const randomY = (i * 30) % 100;
+        return (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-accent-orange/30 rounded-full"
+            initial={{
+              x: `${randomX}%`,
+              y: `${randomY}%`,
+              opacity: 0,
+            }}
+            animate={{
+              y: [`${randomY}%`, `${randomY - 10}%`],
+              opacity: [0, 1, 0],
+              scale: [0, 1, 0],
+            }}
+            transition={{
+              duration: 3 + (i * 0.5),
+              repeat: Infinity,
+              delay: i * 0.4,
+              ease: "easeInOut"
+            }}
+          />
+        );
+      })}
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-3xl">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1, ease: "easeOut" }}
           >
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-2xl">
+            <motion.h1 
+              className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-2xl"
+              animate={{
+                textShadow: [
+                  "0 0 20px rgba(255,255,255,0.5)",
+                  "0 0 30px rgba(249,115,22,0.5)",
+                  "0 0 20px rgba(255,255,255,0.5)",
+                ]
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
               Cleaner ingredients.
               <br />
-              <span className="bg-gradient-to-r from-white via-orange-200 to-white bg-clip-text text-transparent">
+              <motion.span 
+                className="bg-gradient-to-r from-white via-orange-200 to-white bg-clip-text text-transparent"
+                animate={{
+                  backgroundPosition: ["0%", "100%", "0%"],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+                style={{
+                  backgroundSize: "200%",
+                }}
+              >
                 Better meals
-              </span>
+              </motion.span>
               {' '}— delivered.
-            </h1>
+            </motion.h1>
           </motion.div>
 
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
             className="text-xl md:text-2xl text-white/90 mb-10 leading-relaxed"
           >
             Wholesome, plant-based meals made from real fruits and vegetables — ready whenever you are.
@@ -52,46 +109,51 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-4"
           >
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ 
+                scale: 1.08,
+                y: -3,
+                boxShadow: "0 15px 40px rgba(220, 38, 38, 0.5)",
+                transition: { type: "spring", stiffness: 400 }
+              }}
               whileTap={{ scale: 0.95 }}
-              className="group px-8 py-4 bg-gradient-to-r from-primary-600 to-accent-orange text-white rounded-full font-semibold text-lg hover:from-primary-700 hover:to-orange-600 transition-all glow-red flex items-center justify-center gap-2"
+              className="group px-8 py-4 bg-gradient-to-r from-primary-600 to-accent-orange text-white rounded-full font-semibold text-lg hover:from-primary-700 hover:to-orange-600 transition-all glow-red flex items-center justify-center gap-2 shadow-2xl"
             >
               Get Started
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <motion.div
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                <ArrowRight className="w-5 h-5" />
+              </motion.div>
             </motion.button>
 
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ 
+                scale: 1.08,
+                y: -3,
+                borderColor: "rgba(249, 115, 22, 0.8)",
+                transition: { type: "spring", stiffness: 400 }
+              }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 glass text-white rounded-full font-semibold text-lg hover:bg-black/40 transition-all border-glow-orange flex items-center justify-center gap-2"
+              className="px-8 py-4 glass text-white rounded-full font-semibold text-lg hover:bg-black/50 transition-all border-glow-orange flex items-center justify-center gap-2 shadow-xl"
             >
-              <Play className="w-5 h-5" />
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                className="w-5 h-5 flex items-center justify-center"
+              >
+                <Play className="w-5 h-5" />
+              </motion.div>
               Browse Meals
             </motion.button>
           </motion.div>
         </div>
       </div>
 
-      {/* Food Images with Glow */}
-      <div className="absolute right-10 top-1/2 -translate-y-1/2 hidden lg:block z-10">
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="relative"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-accent-orange/30 to-primary-600/30 blur-3xl rounded-full" />
-          <img
-            src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&h=500&fit=crop"
-            alt="Fresh salad"
-            className="relative w-64 h-64 object-cover rounded-3xl shadow-2xl border border-white/10"
-          />
-        </motion.div>
-      </div>
 
       {/* Decorative Elements */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-dark-200 to-transparent" />

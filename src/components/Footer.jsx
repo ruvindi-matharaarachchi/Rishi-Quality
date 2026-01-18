@@ -28,10 +28,15 @@ const Footer = () => {
               viewport={{ once: true }}
               className="flex items-center space-x-3 mb-4"
             >
-              <img 
+              <motion.img 
                 src="/logo.png" 
                 alt="Rishi Quality Logo" 
-                className="w-12 h-12 object-contain"
+                className="w-16 h-16 object-contain"
+                whileHover={{ 
+                  scale: 1.1,
+                  rotate: [0, -5, 5, -5, 0],
+                  transition: { duration: 0.5 }
+                }}
               />
             </motion.div>
             <p className="text-gray-400 mb-6 leading-relaxed">
