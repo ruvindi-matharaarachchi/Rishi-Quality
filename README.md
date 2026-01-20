@@ -37,6 +37,69 @@ npm run dev
 npm run build
 ```
 
+4. Preview production build:
+```bash
+npm run preview
+```
+
+## 🚀 Deployment to GitHub Pages
+
+### Automatic Deployment (Recommended)
+
+1. **Enable GitHub Pages:**
+   - Go to your repository on GitHub
+   - Navigate to Settings → Pages
+   - Under "Source", select "GitHub Actions"
+
+2. **Push to GitHub:**
+   ```bash
+   git add .
+   git commit -m "Deploy to GitHub Pages"
+   git push origin main
+   ```
+
+3. **The GitHub Actions workflow will automatically:**
+   - Build your project
+   - Deploy to GitHub Pages
+   - Your site will be available at: `https://[username].github.io/Rishi-Quality/`
+
+### Manual Deployment
+
+If you prefer to deploy manually:
+
+1. Build the project:
+   ```bash
+   npm run build
+   ```
+
+2. Push the `dist` folder to the `gh-pages` branch:
+   ```bash
+   npm install -g gh-pages
+   gh-pages -d dist
+   ```
+
+## 🔧 Troubleshooting
+
+### 404 Error on main.jsx
+
+If you see a 404 error for `main.jsx`:
+
+1. **Make sure the dev server is running:**
+   ```bash
+   npm run dev
+   ```
+
+2. **Clear node_modules and reinstall:**
+   ```bash
+   rm -rf node_modules package-lock.json
+   npm install
+   ```
+
+3. **Check that all files exist:**
+   - `src/main.jsx` should exist
+   - `src/App.jsx` should exist
+   - `index.html` should reference `/src/main.jsx`
+
 ## 🎨 Design Features
 
 - Clean, premium Apple-level spacing
