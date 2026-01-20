@@ -1,22 +1,27 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import CategorySection from './components/CategorySection';
-import ProductGrid from './components/ProductGrid';
-import FeatureSection from './components/FeatureSection';
 import Footer from './components/Footer';
+import Home from './pages/Home';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import Shop from './pages/Shop';
+import Recipes from './pages/Recipes';
 
 function App() {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <main>
-        <Hero />
-        <CategorySection />
-        <ProductGrid />
-        <FeatureSection />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/recipes" element={<Recipes />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
